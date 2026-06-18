@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSync | Carbon Footprint Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <main class="glass-container">
+        <!-- ONBOARDING SECTION -->
+        <section id="onboarding" class="active">
+            <div class="header">
+                <h1>Welcome to <span class="highlight">EcoSync</span></h1>
+                <p>Let's calculate your baseline carbon footprint. Don't worry, it only takes 3 questions.</p>
+            </div>
+            
+            <form id="onboarding-form">
+                <div class="form-group">
+                    <label for="transport">How do you primarily commute?</label>
+                    <select id="transport" required>
+                        <option value="car_gas">Gasoline Car</option>
+                        <option value="car_ev">Electric Vehicle</option>
+                        <option value="public">Public Transit (Bus/Train)</option>
+                        <option value="bike_walk">Bike / Walk / Remote</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="diet">What best describes your diet?</label>
+                    <select id="diet" required>
+                        <option value="meat_heavy">Meat Heavy (Daily)</option>
+                        <option value="average">Average (Mixed)</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="energy">What is your home energy source?</label>
+                    <select id="energy" required>
+                        <option value="grid_standard">Standard Grid (Fossil Fuels)</option>
+                        <option value="mixed">Mixed Grid</option>
+                        <option value="renewable">100% Renewable / Solar</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">Calculate Footprint</button>
+            </form>
+        </section>
+
+        <!-- DASHBOARD SECTION -->
+        <section id="dashboard" class="hidden">
+            <header class="dashboard-header">
+                <h2>Your Footprint Dashboard</h2>
+                <button id="recalculate-btn" class="btn-secondary">Recalculate</button>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- KPI Card -->
+                <div class="card kpi-card">
+                    <h3>Estimated Annual Footprint</h3>
+                    <div class="kpi-value"><span id="total-co2">0.0</span> <span class="unit">Tons CO₂</span></div>
+                    <p id="kpi-comparison" class="kpi-subtitle">Calculating comparison...</p>
+                </div>
+
+                <!-- Chart Card -->
+                <div class="card chart-card">
+                    <h3>Emissions Breakdown</h3>
+                    <div class="chart-container">
+                        <canvas id="footprintChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- AI Actions Card -->
+                <div class="card ai-card">
+                    <h3>✨ Personalized AI Insights</h3>
+                    <p class="ai-subtitle">Powered by Groq Llama 3</p>
+                    
+                    <div class="api-key-input" id="api-key-section">
+                        <input type="password" id="groq-api-key" placeholder="Enter Groq API Key to unlock insights">
+                        <button id="fetch-insights-btn" class="btn-primary">Get Insights</button>
+                    </div>
+
+                    <div id="loading-spinner" class="hidden">
+                        <div class="spinner"></div>
+                        <p>AI is analyzing your profile...</p>
+                    </div>
+
+                    <div id="ai-results" class="hidden">
+                        <ul id="action-list" class="action-list">
+                            <!-- AI Actions will be injected here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
